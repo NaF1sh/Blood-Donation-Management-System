@@ -1,0 +1,178 @@
+body {
+  background-image: url("image/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background-color 0.5s ease;
+}
+
+header {
+  background-color: #ff5e5e;
+
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+nav button {
+  background-color: #fff;
+  color: #ff5e5e;
+  border: 2px solid #ff5e5e;
+  padding: 20px 40px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav button:hover {
+  background-color: #ff5e5e;
+  color: #fff;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.tagline {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tagline h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.tagline p {
+  font-size: 22px;
+  color: #666;
+}
+
+.main-button {
+  background-color: #ff5e5e;
+  color: #fff;
+  border: none;
+  padding: 20px 40px; /* Increased padding for larger buttons */
+  font-size: 20px; /* Increased font size */
+  cursor: pointer;
+  margin: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.main-button:hover {
+  background-color: #fff;
+  color: #ff5e5e;
+  border: 2px solid #ff5e5e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.donation-section {
+  height: 100vh;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(50px);
+  width: 100%;
+  padding: 20px;
+}
+
+.donation-section.scrolled {
+  background-color: #ffcccc;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.donation-button {
+  background-color: #ff5e5e;
+  color: #fff;
+  border: none;
+  padding: 20px 40px; /* Increased padding for larger buttons */
+  font-size: 20px; /* Increased font size */
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.donation-button:hover {
+  background-color: #fff;
+  color: #ff5e5e;
+  border: 2px solid #ff5e5e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.donation-tag {
+  font-size: 22px; /* Increased font size */
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.articles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.article-box {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  width: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.article-box h3 {
+  font-size: 22px; /* Increased font size */
+  margin-bottom: 10px;
+}
+
+.article-box p {
+  font-size: 18px; /* Increased font size */
+  color: #666;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+}

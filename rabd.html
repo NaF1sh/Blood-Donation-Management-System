@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="rabd.css" />
+    <title>Blood Donor Management System</title>
+  </head>
+  <body>
+    <header>
+      <button onclick="location.href='index.html'" class="home-button">
+        Back to Home
+      </button>
+      <h1>Blood Donor Management System</h1>
+    </header>
+    <main>
+      <div class="form-container">
+        <button onclick="showSignUp()">Sign Up</button>
+        <button onclick="showLogin()">Login</button>
+      </div>
+
+      <div id="sign-up" class="form-section" style="display: none">
+        <h2>Sign Up as a Blood Donor</h2>
+        <form
+          id="signUpForm"
+          action="register.php"
+          method="post"
+          onsubmit="return validateSignUp()"
+        >
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required /><br />
+
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="address" required /><br />
+
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" required /><br />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required /><br />
+
+          <label for="cellphone">Cellphone Number:</label>
+          <input type="tel" id="cellphone" name="cellphone" required /><br />
+
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" required /><br />
+
+          <label for="blood_group">Blood Group:</label>
+          <select id="blood_group" name="blood_group" required>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option></select
+          ><br />
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required /><br />
+
+          <label for="confirm_password">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            required
+          /><br />
+
+          <input type="submit" value="Register" />
+        </form>
+      </div>
+
+      <div id="login" class="form-section" style="display: none">
+        <h2>Login</h2>
+        <form action="login.php" method="post">
+          <label for="login_email">Email:</label>
+          <input
+            type="email"
+            id="login_email"
+            name="login_email"
+            required
+          /><br />
+
+          <label for="login_password">Password:</label>
+          <input
+            type="password"
+            id="login_password"
+            name="login_password"
+            required
+          /><br />
+
+          <input type="submit" value="Login" />
+        </form>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2024 Blood Donation Management System</p>
+    </footer>
+
+    <script>
+      function showSignUp() {
+        document.getElementById("sign-up").style.display = "block";
+        document.getElementById("login").style.display = "none";
+      }
+
+      function showLogin() {
+        document.getElementById("sign-up").style.display = "none";
+        document.getElementById("login").style.display = "block";
+      }
+
+      function validateSignUp() {
+        var password = document.getElementById("password").value;
+        var confirm_password =
+          document.getElementById("confirm_password").value;
+        if (password !== confirm_password) {
+          alert("Passwords do not match!");
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

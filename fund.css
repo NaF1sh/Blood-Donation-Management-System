@@ -1,0 +1,109 @@
+body {
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+header {
+  background-color: #ff5e5e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+
+header .home-button {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  background-color: #fff;
+  color: #ff5e5e;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+header .home-button:hover {
+  background-color: #ff5e5e;
+  color: #fff;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tagline {
+  font-size: 24px;
+  color: #ff5e5e;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.donation-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.donation-form label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.donation-form input[type="text"],
+.donation-form input[type="email"],
+.donation-form input[type="number"],
+.donation-form input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.donation-form input[type="submit"] {
+  background-color: #ff5e5e;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  box-sizing: border-box;
+  transition: background-color 0.3s;
+}
+
+.donation-form input[type="submit"]:hover {
+  background-color: #e55555;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+}

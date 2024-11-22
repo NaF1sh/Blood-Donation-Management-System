@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="fund.css" />
+    <title>Fund Us - Blood Donation Management System</title>
+  </head>
+  <body>
+    <header>
+      <button onclick="location.href='index.html'" class="home-button">
+        Back to Home
+      </button>
+      <h1>Support Our Mission</h1>
+    </header>
+    <main>
+      <div class="tagline">
+        <h2>Your Donation Can Save Lives</h2>
+        <p>
+          Every contribution helps us reach more people and provide essential
+          services. Thank you for your support!
+        </p>
+      </div>
+      <form class="donation-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required /><br />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required /><br />
+        <label for="amount">Donation Amount:</label>
+        <input type="number" id="amount" name="amount" required /><br />
+        <label for="bkash">Bkash Number:</label>
+        <input type="tel" id="bkash" name="bkash" required /><br />
+        <input type="submit" value="Donate" />
+      </form>
+    </main>
+    <footer>
+      <p>&copy; 2024 Blood Donation Management System</p>
+    </footer>
+  </body>
+</html>

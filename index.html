@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Blood Donation Management System</title>
+  </head>
+  <body>
+    <header>
+      <h1>Blood Donation Management System</h1>
+    </header>
+    <nav>
+      <button onclick="location.href='about.html'">About</button>
+      <button onclick="location.href='help.html'">Help</button>
+      <button onclick="location.href='articles.html'">Articles</button>
+      <button onclick="location.href='admin_login.html'">Admin Login</button>
+      <!-- New Admin Login button -->
+    </nav>
+    <main class="main-section">
+      <div class="tagline">
+        <h2>Join us to save lives</h2>
+        <p>Your contribution can save lives</p>
+      </div>
+      <button class="main-button" onclick="location.href='rabd.html'">
+        Register as a Blood Donator
+      </button>
+      <div class="tagline">
+        <h2>In need of blood?</h2>
+        <p>Request for blood donation here</p>
+      </div>
+      <button class="main-button" onclick="location.href='lfb.html'">
+        Looking for Blood
+      </button>
+    </main>
+    <section class="donation-section">
+      <button class="donation-button" onclick="location.href='fund.html'">
+        Fund Us
+      </button>
+      <p class="donation-tag">Your support helps save lives!</p>
+      <div class="articles-container">
+        <div class="article-box">
+          <h3>Why Fund Us?</h3>
+          <p>
+            By funding us, you are enabling our mission to save lives through
+            blood donation. Your support helps us maintain essential services
+            and ensures that patients in need receive timely treatment.
+          </p>
+        </div>
+        <div class="article-box">
+          <h3>The Impact of Your Donation</h3>
+          <p>
+            Your financial support aids in the procurement and distribution of
+            blood, improving healthcare infrastructure, and enhancing our
+            ability to serve communities effectively.
+          </p>
+        </div>
+        <div class="article-box">
+          <h3>How Your Contribution Makes a Difference</h3>
+          <p>
+            Contributions help fund public awareness campaigns, donor
+            recruitment drives, and the development of advanced technologies to
+            ensure a safe and efficient blood supply.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <p>&copy; 2024 Blood Donation Management System</p>
+    </footer>
+    <script>
+      // Function to check if the donation section is in view
+      function checkScroll() {
+        const donationSection = document.querySelector(".donation-section");
+        const sectionPosition = donationSection.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.5; // Adjust this value as needed
+        if (sectionPosition < screenPosition) {
+          donationSection.classList.add("scrolled"); // Add class when in view
+        } else {
+          donationSection.classList.remove("scrolled"); // Remove class when out of view
+        }
+      }
+      window.addEventListener("scroll", checkScroll);
+    </script>
+  </body>
+</html>
