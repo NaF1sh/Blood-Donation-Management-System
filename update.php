@@ -22,18 +22,19 @@ $name = $_POST['name'];
 $address = $_POST['address'];
 $phone = $_POST['phone'];
 $email = $_POST['email'];
-$cellphone = $_POST['cellphone'];
 $age = $_POST['age'];
 $blood_group = $_POST['blood_group'];
 
-$sql = "UPDATE donors SET name='$name', address='$address', phone='$phone', email='$email', cell_phone='$cellphone', age=$age, blood_group='$blood_group' WHERE id='$user_id'";
+$sql = "UPDATE donors SET name='$name', address='$address', phone='$phone', email='$email', age=$age, blood_group='$blood_group' WHERE id='$user_id'";
 
 if ($conn->query($sql) === TRUE) {
     $_SESSION['message'] = "Information updated successfully";
     header("Location: dashboard.php");
+    exit();
 } else {
     $_SESSION['message'] = "Error updating information: " . $conn->error;
     header("Location: dashboard.php");
+    exit();
 }
 
 $conn->close();

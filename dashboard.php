@@ -64,9 +64,6 @@ $conn->close();
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required><br>
 
-                <label for="cellphone">Cellphone Number:</label>
-                <input type="tel" id="cellphone" name="cellphone" value="<?php echo $user['cell_phone']; ?>" required><br>
-
                 <label for="age">Age:</label>
                 <input type="number" id="age" name="age" value="<?php echo $user['age']; ?>" required><br>
 
