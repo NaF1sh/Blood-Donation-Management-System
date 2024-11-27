@@ -14,7 +14,6 @@ header {
   color: white;
   padding: 20px;
   text-align: center;
-  width: 100%;
   position: relative;
 }
 
@@ -105,5 +104,4 @@ footer {
   color: white;
   text-align: center;
   padding: 10px;
-  width: 100%;
 }

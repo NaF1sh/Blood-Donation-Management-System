@@ -15,7 +15,6 @@ header {
   padding: 20px;
   text-align: center;
   position: relative;
-  width: 100%;
 }
 
 header .home-button {
@@ -92,5 +91,4 @@ footer {
   color: white;
   text-align: center;
   padding: 20px;
-  width: 100%;
 }

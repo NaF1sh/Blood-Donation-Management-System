@@ -15,7 +15,6 @@ header {
   padding: 20px;
   text-align: center;
   position: relative;
-  width: 100%;
 }
 
 header .home-button {
@@ -98,7 +97,7 @@ main {
   width: 80%;
   max-width: 800px;
   margin: 20px auto;
-  display: none; /* Keep hidden until toggled */
+  display: none;
 }
 
 .live-chat h2 {
@@ -159,5 +158,4 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
-  width: 100%;
 }
