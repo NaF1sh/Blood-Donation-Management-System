@@ -5,17 +5,14 @@ $username = "root";
 $password = "";
 $dbname = "BDMS";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Admin credentials
 $admin_username = "admin";
-$admin_password_hash = password_hash("admin123", PASSWORD_DEFAULT); // Use hashed password
+$admin_password_hash = password_hash("admin123", PASSWORD_DEFAULT); 
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($_POST['username'] == $admin_username && password_verify($_POST['password'], $admin_password_hash)) {
@@ -29,9 +26,23 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     exit();
 }
 
-// Handle table creation and data population
+if (isset($_GET['delete_id'])) {
+    $delete_id = intval($_GET['delete_id']);
+    $sql = "DELETE FROM donors WHERE donor_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+    if ($stmt->affected_rows > 0) {
+        //echo "Donor deleted successfully.";
+    } else {
+        //echo "Error deleting donor.";
+    }
+    $stmt->close();
+}
+
+
+
 if (isset($_POST['populate_data'])) {
-    // Create the donors table if it doesn't exist
     $sql = "CREATE TABLE IF NOT EXISTS donors (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -47,13 +58,13 @@ if (isset($_POST['populate_data'])) {
         echo "Error creating table: " . $conn->error . "<br>";
     }
 
-    // Populate the table with sample data
-    $names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis", "Emily White", "David Green", "Susan Blue", "Michael Black", "Nancy Yellow"];
+
+    /*$names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis", "Emily White", "David Green", "Susan Blue", "Michael Black", "Nancy Yellow"];
     $addresses = ["123 Main St, Bangladesh", "456 Elm St, Dhaka", "789 Oak St, Chittagong", "101 Pine St, Sylhet", "202 Cedar St, Rajshahi", "303 Maple St, Khulna", "404 Birch St, Barisal", "505 Ash St, Comilla", "606 Cherry St, Mymensingh", "707 Willow St, Noakhali"];
     $phones = ["123-456-7890", "234-567-8901", "345-678-9012", "456-789-0123", "567-890-1234", "678-901-2345", "789-012-3456", "890-123-4567", "901-234-5678", "012-345-6789"];
     $emails = ["john@example.com", "jane@example.com", "alice@example.com", "bob@example.com", "charlie@example.com", "emily@example.com", "david@example.com", "susan@example.com", "michael@example.com", "nancy@example.com"];
-    $blood_groups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-    $num_records = 1000; // Number of records to insert
+    $blood_groups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];*/
+    $num_records = 1000;
 
     for ($i = 0; $i < $num_records; $i++) {
         $name = $names[array_rand($names)];
@@ -74,8 +85,7 @@ if (isset($_POST['populate_data'])) {
     }
 }
 
-// Fetch donor data
-$sql = "SELECT id, name, address, phone, email, blood_group FROM donors";
+$sql = "SELECT donor_id, name, address, phone, email, blood_group FROM donors";
 $result = $conn->query($sql);
 
 ?>
@@ -98,14 +108,14 @@ $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["address"] . "</td><td>" . $row["phone"] . "</td><td>" . $row["email"] . "</td><td>" . $row["blood_group"] . "</td>
+                echo "<tr><td>" . $row["donor_id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["address"] . "</td><td>" . $row["phone"] . "</td><td>" . $row["email"] . "</td><td>" . $row["blood_group"] . "</td>
                       <td>
                         <form action='update_donor.php' method='post' style='display:inline-block;'>
-                            <input type='hidden' name='id' value='" . $row["id"] . "'>
+                            <input type='hidden' name='id' value='" . $row["donor_id"] . "'>
                             <input type='submit' value='Edit'>
                         </form>
                         <form action='admin_dashboard.php' method='get' style='display:inline-block;'>
-                            <input type='hidden' name='delete_id' value='" . $row["id"] . "'>
+                            <input type='hidden' name='delete_id' value='" . $row["donor_id"] . "'>
                             <input type='submit' value='Delete'>
                         </form>
                       </td></tr>";

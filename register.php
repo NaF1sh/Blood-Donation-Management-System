@@ -1,5 +1,5 @@
 <?php
-// Enable error reporting for debugging
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,19 +10,19 @@ $username = "root";
 $password = "";
 $dbname = "BDMS";
 
-// Create connection
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {
     echo "Connected successfully to the database.<br>";
 }
 
-// Check if form is submitted via POST
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "Form submitted with POST method.<br>";
+    echo "Form submitted<br>";
     
     if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['phone']) &&
         !empty($_POST['email']) && !empty($_POST['age']) && !empty($_POST['blood_group']) &&
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
-        // Check if passwords match
+
         if ($password !== $confirm_password) {
             echo "Passwords do not match!";
             exit();
@@ -47,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo "Passwords match.<br>";
 
-        // Check if email or phone already exists
         $check_sql = "SELECT * FROM donors WHERE email='$email' OR phone='$phone'";
         $check_result = $conn->query($check_sql);
 
@@ -56,17 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // Hash the password
+
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Insert donor data into the database
+
         $sql = "INSERT INTO donors (name, address, phone, email, age, blood_group, password) 
                 VALUES ('$name', '$address', '$phone', '$email', '$age', '$blood_group', '$hashed_password')";
 
         if ($conn->query($sql) === TRUE) {
             echo "<p>Registration successful! Redirecting to dashboard...</p>";
-            $_SESSION['user_id'] = $conn->insert_id; // Store user ID in session
-            $_SESSION['user_name'] = $name; // Store user name in session
+            $_SESSION['user_id'] = $conn->insert_id;
+            $_SESSION['user_name'] = $name; 
             echo "<script>setTimeout(function(){ window.location.href = 'dashboard.php'; }, 3000);</script>";
             exit();
         } else {
@@ -78,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Form not submitted correctly.";
 }
-
-// Close connection
 $conn->close();
 ?>
+
+

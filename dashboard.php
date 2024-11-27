@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 }
 
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM donors WHERE id='$user_id'";
+$sql = "SELECT * FROM donors WHERE donor_id='$user_id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -51,7 +51,7 @@ $conn->close();
                 unset($_SESSION['message']);
             }
             ?>
-            <form action="update.php" method="post">
+            <form action="dashboard.php" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required><br>
 
