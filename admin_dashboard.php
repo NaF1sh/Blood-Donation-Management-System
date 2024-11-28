@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 $admin_username = "admin";
-$admin_password_hash = password_hash("admin123", PASSWORD_DEFAULT); 
+$admin_password_hash = password_hash("admin123", PASSWORD_DEFAULT);
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($_POST['username'] == $admin_username && password_verify($_POST['password'], $admin_password_hash)) {
@@ -33,22 +33,20 @@ if (isset($_GET['delete_id'])) {
     $stmt->bind_param("i", $delete_id);
     $stmt->execute();
     if ($stmt->affected_rows > 0) {
-        //echo "Donor deleted successfully.";
+        echo "Donor deleted successfully.<br>";
     } else {
-        //echo "Error deleting donor.";
+        echo "Error deleting donor.<br>";
     }
     $stmt->close();
 }
 
-
-
 if (isset($_POST['populate_data'])) {
     $sql = "CREATE TABLE IF NOT EXISTS donors (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        donor_id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         address VARCHAR(255) NOT NULL,
-        phone VARCHAR(20) NOT NULL,
-        email VARCHAR(255) NOT NULL,
+        phone VARCHAR(20) UNIQUE NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
         blood_group VARCHAR(5) NOT NULL,
         password VARCHAR(255) NOT NULL
     )";
@@ -58,36 +56,80 @@ if (isset($_POST['populate_data'])) {
         echo "Error creating table: " . $conn->error . "<br>";
     }
 
+    $check_sql = "SELECT COUNT(*) AS count FROM donors";
+    $check_result = $conn->query($check_sql);
+    $row = $check_result->fetch_assoc();
 
-    /*$names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis", "Emily White", "David Green", "Susan Blue", "Michael Black", "Nancy Yellow"];
-    $addresses = ["123 Main St, Bangladesh", "456 Elm St, Dhaka", "789 Oak St, Chittagong", "101 Pine St, Sylhet", "202 Cedar St, Rajshahi", "303 Maple St, Khulna", "404 Birch St, Barisal", "505 Ash St, Comilla", "606 Cherry St, Mymensingh", "707 Willow St, Noakhali"];
-    $phones = ["123-456-7890", "234-567-8901", "345-678-9012", "456-789-0123", "567-890-1234", "678-901-2345", "789-012-3456", "890-123-4567", "901-234-5678", "012-345-6789"];
-    $emails = ["john@example.com", "jane@example.com", "alice@example.com", "bob@example.com", "charlie@example.com", "emily@example.com", "david@example.com", "susan@example.com", "michael@example.com", "nancy@example.com"];
-    $blood_groups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];*/
-    $num_records = 1000;
+    if ($row['count'] == 0) {
+        $names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis", "Emily White", "David Green", "Susan Blue", "Michael Black", "Nancy Yellow"];
+        $addresses = ["123 Main St, Bangladesh", "456 Elm St, Dhaka", "789 Oak St, Chittagong", "101 Pine St, Sylhet", "202 Cedar St, Rajshahi", "303 Maple St, Khulna", "404 Birch St, Barisal", "505 Ash St, Comilla", "606 Cherry St, Mymensingh", "707 Willow St, Noakhali"];
+        $phones = ["123-456-7890", "234-567-8901", "345-678-9012", "456-789-0123", "567-890-1234", "678-901-2345", "789-012-3456", "890-123-4567", "901-234-5678", "012-345-6789"];
+        $emails = ["john@example.com", "jane@example.com", "alice@example.com", "bob@example.com", "charlie@example.com", "emily@example.com", "david@example.com", "susan@example.com", "michael@example.com", "nancy@example.com"];
+        $blood_groups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+        $num_records = 10;
 
-    for ($i = 0; $i < $num_records; $i++) {
-        $name = $names[array_rand($names)];
-        $address = $addresses[array_rand($addresses)];
-        $phone = $phones[array_rand($phones)];
-        $email = $emails[array_rand($emails)];
-        $blood_group = $blood_groups[array_rand($blood_groups)];
-        $password = password_hash("password", PASSWORD_DEFAULT);
+        $used_emails = [];
+        $used_phones = [];
+
+        for ($i = 0; $i < $num_records; $i++) {
+            $name = $names[array_rand($names)];
+            $address = $addresses[array_rand($addresses)];
+
+            do {
+                $phone = "9" . rand(100000000, 999999999);
+            } while (in_array($phone, $used_phones));
+            $used_phones[] = $phone;
+
+            do {
+                $email = "user" . rand(1, 1000) . "@example.com";
+            } while (in_array($email, $used_emails));
+            $used_emails[] = $email;
+
+            $blood_group = $blood_groups[array_rand($blood_groups)];
+            $password = password_hash("password", PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO donors (name, address, phone, email, blood_group, password)
+                    VALUES ('$name', '$address', '$phone', '$email', '$blood_group', '$password')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "New record created successfully<br>";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
+            }
+        }
+
+        echo "Sample data populated successfully<br>";
+    } else {
+        echo "Table already contains data. No new data added.<br>";
+    }
+}
+
+if (isset($_POST['add_donor'])) {
+    if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['phone']) && 
+        !empty($_POST['email']) && !empty($_POST['blood_group']) && !empty($_POST['password'])) {
+
+        $name = $_POST['name'];
+        $address = $_POST['address'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $blood_group = $_POST['blood_group'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO donors (name, address, phone, email, blood_group, password)
                 VALUES ('$name', '$address', '$phone', '$email', '$blood_group', '$password')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully<br>";
+            echo "New donor added successfully<br>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
         }
+    } else {
+        echo "Please fill in all fields.<br>";
     }
 }
 
 $sql = "SELECT donor_id, name, address, phone, email, blood_group FROM donors";
 $result = $conn->query($sql);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
