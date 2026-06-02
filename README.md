@@ -6,7 +6,7 @@ Welcome to the Blood Donation Management System project! This system is designed
 
 [here you can preview the website](https://naf1sh.github.io/Blood-Donation-Management-System/index.html)
   
-## 🌟  Table of Contents
+## 🌟 Table of Contents
 - [📖 Introduction](#-introduction)
 - [💡 Features](#-features)
 - [🚀 Installation](#-installation)
